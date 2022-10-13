@@ -165,6 +165,7 @@ impl<'a> FuzzySearcher<'a> {
         let next_char = self.query.get(query_idx);
 
         let score = consecutive as isize * self.scoring.bonus_consecutive
+            + (occurrence.target_idx == 0) as isize * self.scoring.bonus_target_start
             + occurrence.is_start as isize * self.scoring.bonus_word_start
             + self.case_bonus(query_idx - 1, occurrence);
 

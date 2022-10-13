@@ -1,5 +1,6 @@
 pub static DEFAULT_SCORING: Scoring = Scoring {
     bonus_consecutive: 8,
+    bonus_target_start: 10,
     bonus_word_start: 72,
     bonus_match_case: 8,
     penalty_distance: 4,
@@ -15,6 +16,8 @@ pub struct Scoring {
     /// `1 * bonus` for the first consecutive match, `2 * bonus` for
     /// the second, etc.
     pub bonus_consecutive: isize,
+    /// Added when a query char matches the torget start.
+    pub bonus_target_start: isize,
     /// Added when a query char matches a word start.
     pub bonus_word_start: isize,
     /// Added when the matched query char also matches the case of the target char.
@@ -29,12 +32,14 @@ impl Scoring {
     /// Creates a new configuration with the given bonuses/penalties.
     pub fn new(
         bonus_consecutive: isize,
+        bonus_target_start: isize,
         bonus_word_start: isize,
         bonus_match_case: isize,
         penalty_distance: isize,
     ) -> Self {
         Scoring {
             bonus_consecutive,
+            bonus_target_start,
             bonus_word_start,
             bonus_match_case,
             penalty_distance,
@@ -48,7 +53,7 @@ impl Scoring {
 
     /// Creates a configuration that emphasizes short distances between matched chars.
     pub fn emphasize_distance() -> Self {
-        Scoring::new(12, 24, 8, 8)
+        Scoring::new(12, 0, 24, 8, 8)
     }
 }
 

@@ -106,7 +106,7 @@ pub use search::FuzzySearch;
 ///     .expect("No match");
 ///
 /// assert_eq!(m.matched_indices().len(), 3);
-/// assert_eq!(m.score(), 172);
+/// assert_eq!(m.score(), 182);
 /// ```
 ///
 pub fn best_match(query: &str, target: &str) -> Option<Match> {
